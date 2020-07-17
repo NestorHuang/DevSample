@@ -9,15 +9,12 @@ namespace DevSample.CoreVersion.DLLDI.ConfigSetting
     {
         IConfigurationRoot configuration;
 
-        public ConsoleSetting(IServiceCollection serviceCollection)
+        public ConsoleSetting()
         {
             configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                 .AddJsonFile("appsettings.json", false)
                 .Build();
-
-            // Add access to generic IConfigurationRoot
-            //serviceCollection.AddSingleton<IConfigurationRoot>(configuration);
         }
 
         public IConfigurationRoot GetConfiguration()

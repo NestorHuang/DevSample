@@ -1,4 +1,5 @@
-﻿using DevSample.CoreVersion.DLLDI;
+﻿using DevSample.CoreVersion.DAL;
+using DevSample.CoreVersion.DLLDI;
 using DevSample.CoreVersion.DLLDI.ConfigSetting;
 using DevSample.CoreVersion.DLLDI.Hello;
 using Microsoft.Extensions.Configuration;
@@ -24,16 +25,17 @@ namespace DevSample.CoreVersion.ConsoleDI
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             // 3. 執行主服務
-            serviceProvider.GetRequiredService<HelloSelector>().Say();            
+            serviceProvider.GetRequiredService<HelloSelector>().Say();
 
-            var _config = serviceProvider.GetRequiredService<ConfigSelector>().GetConfig();
-            Console.WriteLine(_config.GetSection("TestSetting").Value);
-            Console.WriteLine(_config.GetSection("Settings").GetSection("Set1").Value);
-            Console.WriteLine(_config.GetSection("Settings:Set2").Value);
+            var _configSelect = serviceProvider.GetRequiredService<ConfigSelector>();
+            var _config = _configSelect.GetConfig();
+            //Console.WriteLine(_config.GetSection("TestSetting").Value);
+            //Console.WriteLine(_config.GetSection("Settings").GetSection("Set1").Value);
+            //Console.WriteLine(_config.GetSection("Settings:Set2").Value);
+            EInvoice.UpdateXMLExported(_config.GetConnectionString("ReadWrite"));
+            //Console.WriteLine(_config.GetConnectionString("ReadWrite"));
 
-            Console.WriteLine(_config.GetConnectionString("ReadWrite"));
-
-            new SampleUseConnection(serviceProvider).ShowConnection(); 
+            //new SampleUseConnection(serviceProvider).ShowConnection(); 
         }
     }
 }

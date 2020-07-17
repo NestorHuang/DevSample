@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DevSample.CoreVersion.DAL\DevSample.CoreVersion.DAL.csproj" />
     <ProjectReference Include="..\DevSample.CoreVersion.DLLDI\DevSample.CoreVersion.DLLDI.csproj" />
   </ItemGroup>
 
